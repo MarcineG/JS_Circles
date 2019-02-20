@@ -32,14 +32,18 @@ for(let i = 0; i<=50 ; i+=1)
     c.stroke();
 }*/
 
-let x=200;
-requestAnimationFrame(animate);
-function animate() {
+let x=1,y=1;
     requestAnimationFrame(animate);
 
+
+function animate() {
+    requestAnimationFrame(animate);
+    c.clearRect(0,0,innerWidth,innerHeight);
     c.beginPath();
-    c.arc(x,200,x-150,0,Math.PI*2,false);
+    c.arc(400+y,400,1+x,0,Math.PI*2,false);
     c.strokeStyle = "aqua";
     c.stroke();
-    x++;
+    if(x > 50) {x=0;}
+    else {x+=2;}
+    y++;
 }
