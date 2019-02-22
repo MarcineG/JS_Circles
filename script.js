@@ -28,17 +28,6 @@ function Circle(x,y,dx,dy,radius) {
 }
 
 let circleArray = [];
-let amount = 300;
-
-for(let i=0; i<amount+1; i++) {
-    let radius=Math.random()*50+5,
-        dy=(Math.random() - 0.5) * 4,
-        dx=(Math.random() - 0.5) * 4,
-        dr=0,
-        x = Math.random() * (innerWidth - radius * 2) + radius,
-        y = Math.random() * (innerHeight - radius * 2) + radius;
-        circleArray.push(new Circle(x,y,dx,dy,radius));
-}
 
 function animate() {
     requestAnimationFrame(animate);
@@ -50,3 +39,16 @@ function animate() {
 }
 
 requestAnimationFrame(animate);
+
+
+canvas.addEventListener("click", function() {
+    let radius=Math.random()*50+5,
+        dy=(Math.random() - 0.5) * 4,
+        dx=(Math.random() - 0.5) * 4,
+        x = Math.random() * (innerWidth - radius * 2) + radius,
+        y = Math.random() * (innerHeight - radius * 2) + radius;
+    circleArray.push(new Circle(x,y,dx,dy,radius));
+    console.log("TAL");
+});
+
+
