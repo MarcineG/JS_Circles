@@ -9,6 +9,7 @@ function Circle(x,y,dx,dy,radius) {
     this.dx = dx;
     this.dy = dy;
     this.radius = radius;
+    this.originRadius = this.radius;
 
     this.draw = function() {
         c.beginPath();
@@ -28,8 +29,12 @@ function Circle(x,y,dx,dy,radius) {
 
         //REACT
         if(mouse.x - this.x < 50 && mouse.x - this.x > -50 &&
-            mouse.y - this.y < 50 && mouse.y - this.y > -50) {
-            this.radius += 1;
+            mouse.y - this.y < 50 && mouse.y - this.y > -50 &&
+            this.radius < this.originRadius + 60) {
+            this.radius += 4;
+        }
+        else if(this.radius > this.originRadius) {
+            this.radius -= 4;
         }
 
     }
@@ -54,6 +59,7 @@ window.addEventListener('mousemove',function(event) {
     mouse.x = event.x;
     mouse.y = event.y;
 });
+
 
 
 
