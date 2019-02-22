@@ -25,22 +25,15 @@ function Circle(x,y,dx,dy,radius) {
         this.x+=this.dx;
         this.y+=this.dy;
         this.draw();
+
+        //REACT
+        if(mouse.x - this.x < 50 && mouse.x - this.x > -50 &&
+            mouse.y - this.y < 50 && mouse.y - this.y > -50) {
+            this.radius += 1;
+        }
+
     }
 }
-
-let circleArray = [];
-let amount = 300;
-
-for(let i=0; i<amount+1; i++) {
-    let radius=Math.random()*50+5,
-        dy=(Math.random() - 0.5) * 4,
-        dx=(Math.random() - 0.5) * 4,
-        dr=0,
-        x = Math.random() * (innerWidth - radius * 2) + radius,
-        y = Math.random() * (innerHeight - radius * 2) + radius;
-        circleArray.push(new Circle(x,y,dx,dy,radius));
-}
-
 function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0,0,innerWidth,innerHeight);
@@ -48,6 +41,38 @@ function animate() {
     {
         circleArray[i].update();
     }
+}
+
+
+let mouse = {
+    x: undefined,
+    y: undefined
+};
+
+window.addEventListener('mousemove',function(event) {
+    console.log(event);
+    mouse.x = event.x;
+    mouse.y = event.y;
+});
+
+
+
+
+
+
+
+//MAIN
+let circleArray = [];
+let amount = 1000;
+
+for(let i=0; i<amount+1; i++) {
+    let radius=Math.random()*20+5,
+        dy=(Math.random() - 0.5) * 4,
+        dx=(Math.random() - 0.5) * 4,
+        dr=0,
+        x = Math.random() * (innerWidth - radius * 2) + radius,
+        y = Math.random() * (innerHeight - radius * 2) + radius;
+        circleArray.push(new Circle(x,y,dx,dy,radius));
 }
 
 requestAnimationFrame(animate);
