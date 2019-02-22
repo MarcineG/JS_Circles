@@ -40,7 +40,8 @@ function Circle(x,y,dx,dy,radius) {
             this.radius <= this.originRadius + 40) {
             this.radius += 4;
         }
-        else if(this.radius > this.originRadius) {
+        else if(this.radius > this.originRadius && !(mouse.x - this.x < 50 && mouse.x - this.x > -50 &&
+            mouse.y - this.y < 50 && mouse.y - this.y > -50)) {
             this.radius -= 1;
         }
 
