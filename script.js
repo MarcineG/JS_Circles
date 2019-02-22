@@ -9,8 +9,8 @@ function Circle(x,y,dx,dy,radius) {
     this.dx = dx;
     this.dy = dy;
     this.radius = radius;
-    this.fillColor = "black";
-    this.strokeColor = "black";
+    this.fillColor = "#"+((1<<24)*Math.random()|0).toString(16);
+    this.strokeColor = "#"+((1<<24)*Math.random()|0).toString(16);
     this.originRadius = this.radius;
 
     this.draw = function() {
@@ -21,19 +21,14 @@ function Circle(x,y,dx,dy,radius) {
         c.stroke();
         c.fill();
     };
-    this.switchColors = function() {
-        this.fillColor = "#"+((1<<24)*Math.random()|0).toString(16);
-        this.strokeColor = "#"+((1<<24)*Math.random()|0).toString(16);
-    };
+
     this.update = function() {
         //Bounce of walls
         if(this.x + this.radius > innerWidth || this.x - this.radius <= 0) {
             this.dx = -this.dx;
-            this.switchColors();
         }
         if(this.y + this.radius > innerHeight || this.y - this.radius <= 0) {
             this.dy = -this.dy;
-            this.switchColors();
         }
         this.x+=this.dx;
         this.y+=this.dy;
@@ -42,11 +37,11 @@ function Circle(x,y,dx,dy,radius) {
         //REACT
         if(mouse.x - this.x < 50 && mouse.x - this.x > -50 &&
             mouse.y - this.y < 50 && mouse.y - this.y > -50 &&
-            this.radius < this.originRadius + 60) {
+            this.radius <= this.originRadius + 40) {
             this.radius += 4;
         }
         else if(this.radius > this.originRadius) {
-            this.radius -= 4;
+            this.radius -= 1;
         }
 
     }
@@ -60,7 +55,6 @@ function animate() {
     }
 }
 
-
 let mouse = {
     x: undefined,
     y: undefined
@@ -72,21 +66,19 @@ window.addEventListener('mousemove',function(event) {
     mouse.y = event.y;
 });
 
-
-
-
-
-
-
+window.addEventListener('mouseout',function(event) {
+    console.log(event);
+    mouse.x = -200;
+    mouse.y = -200;
+});
 
 //MAIN
 let circleArray = [];
-
 let amount = 1000;
 
 
 for(let i=0; i<amount+1; i++) {
-    let radius=Math.random()*20+5,
+    let radius=Math.random()*10+2,
         dy=(Math.random() - 0.5) * 4,
         dx=(Math.random() - 0.5) * 4,
         dr=0,
