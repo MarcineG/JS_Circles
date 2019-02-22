@@ -15,6 +15,7 @@ function Circle(x,y,dx,dy,radius) {
         c.arc(this.x+this.dx,this.y+this.dy,1+this.radius,0,Math.PI*2,false);
         c.strokeStyle = "aqua";
         c.stroke();
+        c.fill();
     };
 
     this.update = function() {
