@@ -9,20 +9,32 @@ function Circle(x,y,dx,dy,radius) {
     this.dx = dx;
     this.dy = dy;
     this.radius = radius;
+    this.fillColor = "black";
+    this.strokeColor = "black";
     this.originRadius = this.radius;
 
     this.draw = function() {
         c.beginPath();
         c.arc(this.x+this.dx,this.y+this.dy,1+this.radius,0,Math.PI*2,false);
-        c.strokeStyle = "aqua";
+        c.strokeStyle = this.strokeColor;
+        c.fillStyle = this.fillColor;
         c.stroke();
         c.fill();
     };
-
+    this.switchColors = function() {
+        this.fillColor = "#"+((1<<24)*Math.random()|0).toString(16);
+        this.strokeColor = "#"+((1<<24)*Math.random()|0).toString(16);
+    };
     this.update = function() {
         //Bounce of walls
-        if(this.x + this.radius > innerWidth || this.x - this.radius <= 0) {this.dx = -this.dx;}
-        if(this.y + this.radius > innerHeight || this.y - this.radius <= 0) {this.dy = -this.dy;}
+        if(this.x + this.radius > innerWidth || this.x - this.radius <= 0) {
+            this.dx = -this.dx;
+            this.switchColors();
+        }
+        if(this.y + this.radius > innerHeight || this.y - this.radius <= 0) {
+            this.dy = -this.dy;
+            this.switchColors();
+        }
         this.x+=this.dx;
         this.y+=this.dy;
         this.draw();
@@ -69,7 +81,9 @@ window.addEventListener('mousemove',function(event) {
 
 //MAIN
 let circleArray = [];
+
 let amount = 1000;
+
 
 for(let i=0; i<amount+1; i++) {
     let radius=Math.random()*20+5,
@@ -77,7 +91,10 @@ for(let i=0; i<amount+1; i++) {
         dx=(Math.random() - 0.5) * 4,
         dr=0,
         x = Math.random() * (innerWidth - radius * 2) + radius,
-        y = Math.random() * (innerHeight - radius * 2) + radius;
+        y = Math.random() * (innerHeight - radius * 2) + radius,
+        fill = "#"+((1<<24)*Math.random()|0).toString(16),
+        stroke = "#"+((1<<24)*Math.random()|0).toString(16);
+
         circleArray.push(new Circle(x,y,dx,dy,radius));
 }
 
