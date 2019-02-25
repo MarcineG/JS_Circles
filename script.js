@@ -2,6 +2,14 @@ let canvas = document.querySelector('canvas');
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 let c = canvas.getContext('2d');
+let colorPalette = [
+    "#01395C",
+    "#7C96A8",
+    "#8AC6BF",
+    "#F0E5D6",
+    "#F28C81"
+];
+
 
 function Circle(x,y,dx,dy,radius) {
     this.x = x;
@@ -9,8 +17,7 @@ function Circle(x,y,dx,dy,radius) {
     this.dx = dx;
     this.dy = dy;
     this.radius = radius;
-    this.fillColor = "#"+((1<<24)*Math.random()|0).toString(16);
-    this.strokeColor = "#"+((1<<24)*Math.random()|0).toString(16);
+    this.fillColor = this.strokeColor = colorPalette[Math.floor(Math.random() * 5)];
     this.originRadius = this.radius;
 
     this.draw = function() {
@@ -75,7 +82,7 @@ window.addEventListener('mouseout',function(event) {
 
 //MAIN
 let circleArray = [];
-let amount = 1000;
+let amount = 1500;
 
 
 for(let i=0; i<amount+1; i++) {
